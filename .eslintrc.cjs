@@ -5,6 +5,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "react-app",
     "plugin:react-hooks/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
