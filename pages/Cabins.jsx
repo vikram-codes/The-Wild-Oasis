@@ -18,7 +18,7 @@ function Cabins() {
         <p>Filter / sort</p>
         <CabinTable />
         <Button onClick={() => setShowForm((show) => !show)}>
-          {showForm ? "Cancel" : "Add cabin"}
+          {showForm ? "Cancel" : "Add new cabin"}
         </Button>
         {showForm && <CreateCabinForm />}
       </Row>
