@@ -1,7 +1,9 @@
 import styled from "styled-components";
-
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
+import { createCabin } from "../../services/apiCabins";
+import { toast } from "react-hot-toast";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
@@ -44,10 +46,22 @@ const Error = styled.span`
 `;
 
 function CreateCabinForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const queryClient = useQueryClient({});
+
+  const { mutate, isLoading: isCreating } = useMutation({
+    mutationFn: createCabin,
+    onSuccess: () => {
+      toast.success("New Cabin created succesfully");
+      queryClient.invalidateQueries(["cabins"]);
+    },
+    onError: () => {
+      toast.error("Error creating new Cabin");
+    },
+  });
 
   function onSubmit(data) {
-    console.log(data);
+    mutate(data);
   }
 
   return (
@@ -59,7 +73,7 @@ function CreateCabinForm() {
 
       <FormRow>
         <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input type="number" id="maxCapacity" {...register("number")} />
+        <Input type="number" id="maxCapacity" {...register("maxCapacity")} />
       </FormRow>
 
       <FormRow>
@@ -97,7 +111,7 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
+        <Button disabled={isCreating}>Add cabin</Button>
       </FormRow>
     </Form>
   );
