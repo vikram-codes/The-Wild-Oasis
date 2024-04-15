@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import Button from "../../ui/Button";
-import { deleteCabin } from "../../services/apiCabins";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { createEditCabin } from "../../services/apiCabins";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { useCreateCabin } from "./useCreateCabin";
 import { HiX } from "react-icons/hi";
 import { useForm } from "react-hook-form";
+import { useDeleteCabin } from "./useDeleteCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -62,28 +61,9 @@ function CabinRow({ cabin }) {
     image,
     description,
   } = cabin;
-  const { reset } = useForm();
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["cabins"]);
-      toast.success("Cabin created successfully");
-      reset();
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
-  // const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin deleted successfully");
-
-      queryClient.invalidateQueries(["cabins"]);
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { createCabin, isCreating } = useCreateCabin();
+  // });
+  const { isDeleting, deleteCabin } = useDeleteCabin();
 
   function handleDuplicate() {
     createCabin({
@@ -116,7 +96,7 @@ function CabinRow({ cabin }) {
             {showForm ? <HiX /> : <HiPencil />}
           </Button>
           <Button
-            onClick={() => mutate(cabinId)}
+            onClick={() => deleteCabin(cabinId)}
             disabled={isDeleting}
             variation="secondary"
             size="small"

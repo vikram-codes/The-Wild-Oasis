@@ -8,6 +8,7 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import { createEditCabin } from "../../services/apiCabins";
+import { useEditCabin } from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -28,17 +29,18 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
   });
 
   // Editing existing Cabin
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["cabins"]);
-      toast.success("Cabin edited successfully");
-      reset();
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
+  const { editCabin, isEditing } = useEditCabin();
+  // const { mutate: editCabin, isLoading: isEditing } = useMutation({
+  //   mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(["cabins"]);
+  //     toast.success("Cabin edited successfully");
+  //     reset();
+  //   },
+  //   onError: (error) => {
+  //     toast.error(error.message);
+  //   },
+  // });
   const isWorking = isCreating || isEditing;
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
