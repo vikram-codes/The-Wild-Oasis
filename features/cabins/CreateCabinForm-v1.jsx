@@ -10,8 +10,6 @@ import FormRow from "../../ui/FormRow";
 import { createCabin } from "../../services/apiCabins";
 
 function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
-  const { id: editId, ...editValues } = cabinToEdit;
-  const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: createCabin,
@@ -24,9 +22,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
       toast.error(error.message);
     },
   });
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: isEditSession ? editValues : {},
-  });
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
 
   function onSubmit(data) {
