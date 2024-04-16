@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { HiXMark } from "react-icons/hi2";
 import CreateCabinForm from "../features/cabins/CreateCabinForm";
 import { createPortal } from "react-dom";
-import { createContext, useContext, useState } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -53,33 +52,17 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
-
-function Modal({ children }) {
-  const [openName, setOpenName] = useState("");
-
-  const close = () => setOpenName("");
-  const open = (name) => setOpenName;
-}
-
-function Open({ children, opens }) {
-  const { open } = useContext(ModalContext);
-  return { children };
-}
-
-function Window({ onClose, children }) {
+function Modal({ onClose, children }) {
   return createPortal(
-    <ModalContext.Provider value={{ close }}>
-      <Overlay>
-        <StyledModal>
-          <Button onClick={onClose}>
-            <HiXMark />
-          </Button>
-          {children}
-        </StyledModal>
-      </Overlay>
-      , document.body
-    </ModalContext.Provider>
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        {children}
+      </StyledModal>
+    </Overlay>,
+    document.body
   );
 }
 
