@@ -51,14 +51,14 @@ const Button = styled.button`
   }
 `;
 
-function Modal({ onClose }) {
+function Modal({ onClose, children }) {
   return (
     <Overlay>
       <StyledModal>
         <Button onClick={onClose}>
           <HiXMark />
         </Button>
-        <CreateCabinForm label="Add new Cabin" />
+        {children}
       </StyledModal>
     </Overlay>
   );

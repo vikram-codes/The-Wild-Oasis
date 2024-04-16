@@ -10,7 +10,7 @@ import FormRow from "../../ui/FormRow";
 import { createEditCabin } from "../../services/apiCabins";
 import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
+function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
@@ -22,6 +22,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
       queryClient.invalidateQueries(["cabins"]);
       toast.success("Cabin created successfully");
       reset();
+      onCloseModal();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -156,7 +157,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done" }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" onClick={onCloseModal}>
           Cancel
         </Button>
         <Button disabled={isCreating}>{label}</Button>

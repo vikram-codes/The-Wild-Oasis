@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
+import CreateCabinForm from "./CreateCabinForm";
 
 function AddCabin() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -9,7 +10,14 @@ function AddCabin() {
       <Button onClick={() => setIsOpenModal((show) => !show)}>
         Add new Cabin
       </Button>
-      {isOpenModal && <Modal onClose={() => setIsOpenModal(false)} />}
+      {isOpenModal && (
+        <Modal onClose={() => setIsOpenModal(false)}>
+          <CreateCabinForm
+            label="Create New Cabin"
+            onCloseModal={() => setIsOpenModal(false)}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
