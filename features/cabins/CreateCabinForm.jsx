@@ -22,7 +22,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
       queryClient.invalidateQueries(["cabins"]);
       toast.success("Cabin created successfully");
       reset();
-      onCloseModal();
+      onCloseModal?.();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -157,7 +157,11 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset" onClick={onCloseModal}>
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isCreating}>{label}</Button>
