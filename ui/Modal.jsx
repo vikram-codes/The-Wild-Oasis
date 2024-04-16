@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { HiXMark } from "react-icons/hi2";
 import CreateCabinForm from "../features/cabins/CreateCabinForm";
 
 const StyledModal = styled.div`
@@ -50,11 +51,16 @@ const Button = styled.button`
   }
 `;
 
-function Modal() {
+function Modal({ onClose }) {
   return (
-    <StyledModal>
-      <CreateCabinForm label="Add new Cabin" />
-    </StyledModal>
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        <CreateCabinForm label="Add new Cabin" />
+      </StyledModal>
+    </Overlay>
   );
 }
 
