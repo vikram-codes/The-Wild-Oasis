@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CreateCabinForm from "../features/cabins/CreateCabinForm";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -48,3 +49,13 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal() {
+  return (
+    <StyledModal>
+      <CreateCabinForm label="Add new Cabin" />
+    </StyledModal>
+  );
+}
+
+export default Modal;
