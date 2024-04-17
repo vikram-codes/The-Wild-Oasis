@@ -1,17 +1,17 @@
 import { useState } from "react";
-import Modal from "../../ui/Modal";
+import Modal from "../../ui/Modal-v1";
 import Button from "../../ui/Button";
 import CreateCabinForm from "./CreateCabinForm";
 
 function AddCabin() {
-  <Modal>
-    <Modal.Open opens="cabin-form">
-      <Button>Add new Cabin</Button>
-    </Modal.Open>
-    <Modal.Window name="cabin-form">
-      <CreateCabinForm />
-    </Modal.Window>
-  </Modal>;
+  //   <Modal>
+  //     <Modal.Open opens="cabin-form">
+  //       <Button>Add new Cabin</Button>
+  //     </Modal.Open>
+  //     <Modal.Window name="cabin-form">
+  //       <CreateCabinForm />
+  //     </Modal.Window>
+  //   </Modal>;
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   return (
