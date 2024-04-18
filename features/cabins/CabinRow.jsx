@@ -105,7 +105,7 @@ function CabinRow({ cabin }) {
               </Button>
             </Modal.Open>
             <Modal.Window name="cabin-form">
-              <CreateCabinForm />
+              <CreateCabinForm label="Edit" cabinToEdit={cabin} />
             </Modal.Window>
           </Modal>
           <Button
@@ -118,7 +118,6 @@ function CabinRow({ cabin }) {
           </Button>
         </div>
       </TableRow>
-      {showForm && <CreateCabinForm label="Edit" cabinToEdit={cabin} />}
     </>
   );
 }
