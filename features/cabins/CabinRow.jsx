@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import Button from "../../ui/Button";
 import CreateCabinForm from "./CreateCabinForm";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiSquare2Stack, HiTrash, HiXMark } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import { useDeleteCabin } from "./useDeleteCabin";
 import Modal from "../../ui/Modal";
@@ -98,12 +98,7 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount ? <Discount>{formatCurrency(discount)}</Discount> : "--"}
         <div>
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={handleDuplicate}
-            disabled={isCreating}
-          >
+          <Button variation="secondary" size="small" disabled={isCreating}>
             <HiSquare2Stack />
           </Button>
           <Modal>
@@ -127,16 +122,21 @@ function CabinRow({ cabin }) {
                 onConfirm={handelDeleteCabin}
               />
             </Modal.Window>
-          </Modal>
-          <Menus.Menu>
-            <Menus.Toggle id={cabinId} />
+            <Menus.Menu>
+              <Menus.Toggle id={cabinId} />
 
-            <Menus.List id={cabinId}>
-              <Menus.Button>Duplicate</Menus.Button>
-              <Menus.Button>Edit</Menus.Button>
-              <Menus.Button>Delete</Menus.Button>
-            </Menus.List>
-          </Menus.Menu>
+              <Menus.List id={cabinId}>
+                <Menus.Button
+                  icon={<HiSquare2Stack />}
+                  onClick={handleDuplicate}
+                >
+                  Duplicate
+                </Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Menus.List>
+            </Menus.Menu>
+          </Modal>
         </div>
       </Table.Row>
     </>
