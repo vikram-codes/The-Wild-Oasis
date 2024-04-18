@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import Button from "../../ui/Button";
-import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import { HiX } from "react-icons/hi";
-import { useForm } from "react-hook-form";
 import { useDeleteCabin } from "./useDeleteCabin";
 
 const TableRow = styled.div`
@@ -51,7 +49,6 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
-  const queryClient = useQueryClient();
   const {
     id: cabinId,
     name,
@@ -62,7 +59,6 @@ function CabinRow({ cabin }) {
     description,
   } = cabin;
   const { createCabin, isCreating } = useCreateCabin();
-  // });
   const { isDeleting, deleteCabin } = useDeleteCabin();
 
   function handleDuplicate() {
@@ -91,6 +87,7 @@ function CabinRow({ cabin }) {
           <Button
             variation="secondary"
             size="small"
+            disabled={isCreating}
             onClick={() => setShowForm((show) => !show)}
           >
             {showForm ? <HiX /> : <HiPencil />}

@@ -16,7 +16,6 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
   const isEditSession = Boolean(editId);
 
   const { createCabin, isCreating } = useCreateCabin();
-
   const { editCabin, isEditing } = useEditCabin();
 
   const isWorking = isCreating || isEditing;
