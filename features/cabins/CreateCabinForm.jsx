@@ -33,6 +33,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
         {
           onSuccess: (data) => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -42,6 +43,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
         {
           onSuccess: (data) => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -143,7 +145,7 @@ function CreateCabinForm({ cabinToEdit = {}, label = "Done", onCloseModal }) {
         >
           Cancel
         </Button>
-        <Button disabled={isCreating}>{label}</Button>
+        <Button disabled={isWorking}>{label}</Button>
       </FormRow>
     </Form>
   );

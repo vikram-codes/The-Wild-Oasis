@@ -99,12 +99,12 @@ function CabinRow({ cabin }) {
             <HiSquare2Stack />
           </Button>
           <Modal>
-            <Modal.Open opens="cabin-form">
+            <Modal.Open opens="edit">
               <Button variation="secondary" size="small">
                 <HiPencil />
               </Button>
             </Modal.Open>
-            <Modal.Window name="cabin-form">
+            <Modal.Window name="edit">
               <CreateCabinForm label="Edit" cabinToEdit={cabin} />
             </Modal.Window>
           </Modal>
