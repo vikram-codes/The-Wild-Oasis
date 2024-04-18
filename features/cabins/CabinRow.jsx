@@ -98,15 +98,20 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount ? <Discount>{formatCurrency(discount)}</Discount> : "--"}
         <div>
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={handleDuplicate}
-            disabled={isCreating}
-          >
-            <HiSquare2Stack />
-          </Button>
           <Modal>
+            <Modal.Open opens="duplicate">
+              <Button
+                variation="secondary"
+                size="small"
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
+                <HiSquare2Stack />
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="duplicate">
+              <CreateCabinForm label="Duplicate" cabinToEdit={cabin} />
+            </Modal.Window>
             <Modal.Open opens="edit">
               <Button variation="secondary" size="small">
                 <HiPencil />
@@ -115,8 +120,6 @@ function CabinRow({ cabin }) {
             <Modal.Window name="edit">
               <CreateCabinForm label="Edit" cabinToEdit={cabin} />
             </Modal.Window>
-          </Modal>
-          <Modal>
             <Modal.Open opens="delete">
               <Button disabled={isDeleting} variation="secondary" size="small">
                 <HiTrash />
