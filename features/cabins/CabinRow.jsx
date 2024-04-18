@@ -7,6 +7,7 @@ import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import { HiX } from "react-icons/hi";
 import { useDeleteCabin } from "./useDeleteCabin";
+import Modal from "../../ui/Modal";
 
 const TableRow = styled.div`
   display: grid;
@@ -72,6 +73,19 @@ function CabinRow({ cabin }) {
     });
   }
 
+  // function editCabins() {
+  //   return (
+  //     <>
+  //       <Modal>
+  //         <Modal.Open opens="cabin-form"></Modal.Open>
+  //         <Modal.Window name="cabin-form">
+  //           <CreateCabinForm />
+  //         </Modal.Window>
+  //       </Modal>
+  //     </>
+  //   );
+  // }
+
   return (
     <>
       <TableRow role="row">
@@ -84,14 +98,16 @@ function CabinRow({ cabin }) {
           <Button variation="secondary" size="small" onClick={handleDuplicate}>
             <HiSquare2Stack />
           </Button>
-          <Button
-            variation="secondary"
-            size="small"
-            disabled={isCreating}
-            onClick={() => setShowForm((show) => !show)}
-          >
-            {showForm ? <HiX /> : <HiPencil />}
-          </Button>
+          <Modal>
+            <Modal.Open opens="cabin-form">
+              <Button variation="secondary" size="small">
+                <HiPencil />
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="cabin-form">
+              <CreateCabinForm />
+            </Modal.Window>
+          </Modal>
           <Button
             onClick={() => deleteCabin(cabinId)}
             disabled={isDeleting}
