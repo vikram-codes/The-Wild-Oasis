@@ -5,9 +5,9 @@ import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
-import { HiX } from "react-icons/hi";
 import { useDeleteCabin } from "./useDeleteCabin";
 import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -72,6 +72,9 @@ function CabinRow({ cabin }) {
       description,
     });
   }
+  function handelDeleteCabin() {
+    deleteCabin(cabinId);
+  }
 
   // function editCabins() {
   //   return (
@@ -95,7 +98,12 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount ? <Discount>{formatCurrency(discount)}</Discount> : "--"}
         <div>
-          <Button variation="secondary" size="small" onClick={handleDuplicate}>
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={handleDuplicate}
+            disabled={isCreating}
+          >
             <HiSquare2Stack />
           </Button>
           <Modal>
@@ -108,14 +116,20 @@ function CabinRow({ cabin }) {
               <CreateCabinForm label="Edit" cabinToEdit={cabin} />
             </Modal.Window>
           </Modal>
-          <Button
-            onClick={() => deleteCabin(cabinId)}
-            disabled={isDeleting}
-            variation="secondary"
-            size="small"
-          >
-            <HiTrash />
-          </Button>
+          <Modal>
+            <Modal.Open opens="delete">
+              <Button disabled={isDeleting} variation="secondary" size="small">
+                <HiTrash />
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="Cabin"
+                disabled={isDeleting}
+                onConfirm={handelDeleteCabin}
+              />
+            </Modal.Window>
+          </Modal>
         </div>
       </TableRow>
     </>
