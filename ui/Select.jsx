@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const StyledSelect = styled.select`
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
@@ -13,3 +12,9 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+function Select({ options, value }) {
+  return <StyledSelect value={value}></StyledSelect>;
+}
+
+export default Select;
