@@ -1,5 +1,11 @@
+import Select from "./Select";
+
 function SortBy({ options }) {
-  return <div>Sort</div>;
+  return (
+    <div>
+      <Select options={options} />
+    </div>
+  );
 }
 
 export default SortBy;
