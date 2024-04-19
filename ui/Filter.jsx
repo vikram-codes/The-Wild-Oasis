@@ -44,9 +44,7 @@ function Filter() {
   }
   return (
     <StyledFilter>
-      <FilterButton active onClick={() => handleClick("all")}>
-        All
-      </FilterButton>
+      <FilterButton onClick={() => handleClick("all")}>All</FilterButton>
       <FilterButton onClick={() => handleClick("no-discount")}>
         No discount
       </FilterButton>
