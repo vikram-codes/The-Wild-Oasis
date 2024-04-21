@@ -89,6 +89,17 @@ function Row({ children }) {
   );
 }
 
+function BookingBody({ data, render }) {
+  return (
+    <StyledBody role="rowgroup">
+      {data.data.length ? (
+        data.data.map(render)
+      ) : (
+        <Empty role="cell">No data available</Empty>
+      )}
+    </StyledBody>
+  );
+}
 function Body({ data, render }) {
   return (
     <StyledBody role="rowgroup">
@@ -117,5 +128,6 @@ Table.Row = Row;
 Table.Body = Body;
 Table.Footer = Footer;
 Table.CabinBody = CabinBody;
+Table.BookingBody = BookingBody;
 
 export default Table;

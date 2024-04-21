@@ -20,7 +20,7 @@ function BookingTable() {
           <div></div>
         </Table.Header>
 
-        <Table.Body
+        <Table.BookingBody
           data={bookings}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
