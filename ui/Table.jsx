@@ -92,8 +92,8 @@ function Row({ children }) {
 function Body({ data, render }) {
   return (
     <StyledBody role="rowgroup">
-      {data.length ? (
-        data.map(render)
+      {data.data.length ? (
+        data.data.map(render)
       ) : (
         <Empty role="cell">No data available</Empty>
       )}
