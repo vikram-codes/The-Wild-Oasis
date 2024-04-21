@@ -100,10 +100,22 @@ function Body({ data, render }) {
     </StyledBody>
   );
 }
+function CabinBody({ data, render }) {
+  return (
+    <StyledBody role="rowgroup">
+      {data.length ? (
+        data.map(render)
+      ) : (
+        <Empty role="cell">No data available</Empty>
+      )}
+    </StyledBody>
+  );
+}
 
 Table.Header = Header;
 Table.Row = Row;
 Table.Body = Body;
 Table.Footer = Footer;
+Table.CabinBody = CabinBody;
 
 export default Table;
