@@ -1,10 +1,12 @@
 import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
-import { getBooking, getBookings } from "../../services/apiBookings";
+import { useBookings } from "./useBookings";
+import Spinner from "../../ui/Spinner";
 
 function BookingTable() {
-  const bookings = getBookings();
+  const { bookings = [], error, isLoading } = useBookings();
+  if (isLoading) return <Spinner />;
 
   return (
     <Menus>
@@ -18,12 +20,12 @@ function BookingTable() {
           <div></div>
         </Table.Header>
 
-        <Table.Body
+        {/* <Table.Body
           data={bookings}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
-        />
+        /> */}
       </Table>
     </Menus>
   );
