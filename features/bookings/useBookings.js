@@ -19,6 +19,7 @@ export function useBookings() {
   const sortByRaw = searchParams.get("sortBy") || "startDate-desc";
   const [field, direction] = sortByRaw.split("-");
   const sortBy = { field, direction };
+
   const {
     data: bookings,
     error,
@@ -27,6 +28,5 @@ export function useBookings() {
     queryKey: ["bookings", { filter, sortBy }],
     queryFn: () => getBookings({ filter, sortBy }),
   });
-  //   console.log(bookings);
   return { bookings, error, isLoading };
 }
