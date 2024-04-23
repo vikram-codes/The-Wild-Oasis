@@ -16,7 +16,7 @@ const HeadingGroup = styled.div`
   align-items: center;
 `;
 
-function BookingDetail() {
+function BookingDetail({}) {
   const booking = {};
   const status = "checked-in";
 
