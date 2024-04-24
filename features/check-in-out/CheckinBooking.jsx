@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useCheckin } from "./useCheckin";
 import { formatCurrency } from "../../utils/helpers";
 import { useSettings } from "../settings/useSettings";
+import Checkin from "../../pages/Checkin";
 
 const Box = styled.div`
   /* Box */
@@ -50,7 +51,18 @@ function CheckinBooking() {
 
   function handleCheckin() {
     if (!confirmPaid) return;
-    checkIn(bookingId);
+    if (addBreakfast) {
+      checkIn({
+        bookingId,
+        breakfast: {
+          hasBreakfast: true,
+          extrasPrice: optionalBreakfast,
+          totalPrice: totalPrice + optionalBreakfast,
+        },
+      });
+    } else {
+      checkIn({ bookingId });
+    }
   }
 
   return (
