@@ -13,6 +13,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "../bookings/useBooking";
 import { useEffect, useState } from "react";
 import { useCheckin } from "./useCheckin";
+import { formatCurrency } from "../../utils/helpers";
 
 const Box = styled.div`
   /* Box */
@@ -24,6 +25,7 @@ const Box = styled.div`
 
 function CheckinBooking() {
   const [confirmPaid, setConfirmPaid] = useState(false);
+  const [addBreakfast, setAddBreakfast] = useState(false);
   const { booking, isLoading } = useBooking();
   const { checkIn, isCheckingIn } = useCheckin();
 
@@ -56,7 +58,16 @@ function CheckinBooking() {
       </Row>
 
       <BookingDataBox booking={booking} />
-
+      <Box>
+        <Checkbox
+          checked={addBreakfast}
+          disabled={isCheckingIn}
+          id="breakfast"
+          onChange={() => setAddBreakfast((set) => !set)}
+        >
+          Add breakfast for {numGuests} guests for {numNights} nights
+        </Checkbox>
+      </Box>
       <Box>
         <Checkbox
           checked={confirmPaid}
@@ -64,7 +75,8 @@ function CheckinBooking() {
           id="confirmed"
           onChange={() => setConfirmPaid((set) => !set)}
         >
-          I confirm that {guests.fullName} has paid the full amount
+          I confirm that {guests.fullName} has paid the full amount of{" "}
+          {formatCurrency(totalPrice)} for the booking
         </Checkbox>
       </Box>
 
