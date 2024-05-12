@@ -72,9 +72,6 @@ function CabinRow({ cabin }) {
       description,
     });
   }
-  function handelDeleteCabin() {
-    deleteCabin(cabinId);
-  }
 
   // function editCabins() {
   //   return (
