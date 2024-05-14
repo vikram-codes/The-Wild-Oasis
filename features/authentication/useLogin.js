@@ -1,9 +1,22 @@
-import login from "../services/apiAuth";
+import { useMutation } from "@tanstack/react-query";
+import { login as loginApi } from "../../services/apiAuth";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function useLogin() {
-  // 1. Import the `useState` hook
-  // 2. Import the `login` function from `services/apiAuth`
-  // 3. Create state variables for `email` and `password`
-  // 4. Create a function called `loginUser` that calls the `login` function
-  // 5. Return the `loginUser` function and the `email` and `password` state variables
+  const navigate = useNavigate();
+
+  const { mutate: login, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => loginApi({ email, password }),
+    onSuccess: (user) => {
+      console.log(user);
+      navigate("/dashboard");
+      toast.success("Login successful");
+    },
+    onError: (error) => {
+      toast.error("Login failed");
+      console.error("ERROR", error);
+    },
+  });
+  return { login, isLoading };
 }
