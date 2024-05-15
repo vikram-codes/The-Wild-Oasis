@@ -3,8 +3,8 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "./useSignup";
 
 // Email regex: /\S+@\S+\.\S+/
 
@@ -12,11 +12,11 @@ function SignupForm() {
   const { register, formState, handleSubmit, getValues } = useForm();
   const { errors } = formState;
   const navigate = useNavigate();
+  const { signup, isLoading } = useSignup();
 
   function onSubmit(data) {
-    console.log(data);
-    toast.success("User created");
-    navigate("/dashboard");
+    console.log("signupForm", data);
+    signup(data);
   }
 
   return (
@@ -78,7 +78,7 @@ function SignupForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Create new user</Button>
+        <Button disabled={isLoading}>Create new user</Button>
       </FormRow>
     </Form>
   );
