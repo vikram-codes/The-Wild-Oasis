@@ -1,18 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateUser as updateUserApi } from "../../services/apiAuth";
+import { updateCurrentUser as updateCurrentUserApi } from "../../services/apiAuth";
 import { toast } from "react-hot-toast";
 
 export function useUpdateUser() {
   const queryClient = useQueryClient();
 
-  const { mutate: updateUser, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
+  const { mutate: updateUser, isLoading: isUpdating } = useMutation({
+    mutationFn: updateCurrentUserApi,
     onSuccess: () => {
-      toast.success("User successfully edited");
-      queryClient.invalidateQueries({ queryKey: ["avatars"] });
+      toast.success("User successfully updated!");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: (err) => toast.error(err.message),
   });
 
-  return { isEditing, updateUser };
+  return { isUpdating, updateUser };
 }
