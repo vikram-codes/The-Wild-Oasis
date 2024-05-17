@@ -26,7 +26,7 @@ function UserAvatar() {
   const { avatar, fullName } = user.user_metadata;
   return (
     <StyledUserAvatar>
-      <Avatar src={avatar || "default-user.jpg"} alt={fullName} />
+      <Avatar src={avatar || "random_user.jpg"} alt={fullName} />
       <span>{fullName}</span>
     </StyledUserAvatar>
   );
