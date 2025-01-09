@@ -1,12 +1,16 @@
+import styled from "styled-components";
+
+const H1 = styled.h1`
+  font-size: 30px;
+  font-weight: 600;
+`;
 
 function App() {
-
-
   return (
     <>
-     <h1> Hello The-Wild-Oasis</h1>
+      <H1> Hello The-Wild-Oasis</H1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
