@@ -2,6 +2,14 @@ import styled from "styled-components";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
 import { HiTrash } from "react-icons/hi2";
+import { de } from "date-fns/locale";
+import { deleteCabin } from "../../services/apiCabins";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { use } from "react";
 
 const TableRow = styled.div`
   display: grid;
@@ -43,7 +51,25 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const { name, maxCapacity, regularPrice, discount, image } = cabin;
+  const {
+    id: cabinID,
+    name,
+    maxCapacity,
+    regularPrice,
+    discount,
+    image,
+  } = cabin;
+
+  const queryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: deleteCabin(cabinID),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["cabins"],
+      });
+    },
+  });
 
   return (
     <TableRow role="row">
@@ -52,7 +78,12 @@ function CabinRow({ cabin }) {
       <div>Fits upto {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>{formatCurrency(discount)}</Discount>
-      <Button size="small" variation="danger">
+      <Button
+        size="small"
+        variation="danger"
+        onClick={() => mutate(cabinID)}
+        disabled={isDeleting}
+      >
         <HiTrash />
       </Button>
     </TableRow>
