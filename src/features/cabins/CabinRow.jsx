@@ -69,6 +69,10 @@ function CabinRow({ cabin }) {
         queryKey: ["cabins"],
       });
     },
+    if(error) {
+      console.error(error);
+      throw new Error("Cabin could not be deleted");
+    },
   });
 
   return (
