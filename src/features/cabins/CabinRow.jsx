@@ -63,7 +63,7 @@ function CabinRow({ cabin }) {
   const queryClient = useQueryClient();
 
   const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin(cabinID),
+    mutationFn: (cabinID) => deleteCabin(cabinID),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
