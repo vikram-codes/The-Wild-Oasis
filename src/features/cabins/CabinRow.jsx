@@ -2,14 +2,10 @@ import styled from "styled-components";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
 import { HiTrash } from "react-icons/hi2";
-import { de } from "date-fns/locale";
 import { deleteCabin } from "../../services/apiCabins";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { use } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import toast from "react-hot-toast";
 
 const TableRow = styled.div`
   display: grid;
@@ -65,14 +61,12 @@ function CabinRow({ cabin }) {
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: (cabinID) => deleteCabin(cabinID),
     onSuccess: () => {
+      toast.success("Cabin successfully deleted!");
       queryClient.invalidateQueries({
         queryKey: ["cabins"],
       });
     },
-    if(error) {
-      console.error(error);
-      throw new Error("Cabin could not be deleted");
-    },
+    onError: (err) => toast.error(err.message),
   });
 
   return (
@@ -93,5 +87,4 @@ function CabinRow({ cabin }) {
     </TableRow>
   );
 }
-
 export default CabinRow;
