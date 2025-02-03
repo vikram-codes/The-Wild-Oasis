@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../../ui/Button";
+
 import { formatCurrency } from "../../utils/helpers";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { deleteCabin } from "../../services/apiCabins";
