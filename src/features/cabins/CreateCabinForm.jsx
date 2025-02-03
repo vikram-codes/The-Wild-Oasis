@@ -48,6 +48,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     if (isEditSession)
       editCabin({ newCabinData: { ...data, image }, id: editID });
     else createCabin({ ...data, image: image });
+    reset();
   }
 
   const isWorking = isCreating || isEditing;
