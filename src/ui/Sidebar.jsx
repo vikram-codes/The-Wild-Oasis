@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import { useCabin } from "../features/cabins/useCabin";
+import { useSettings } from "../features/settings/useSettings";
 
 const StyledAside = styled.aside`
   background-color: var(--color-grey-0);
@@ -15,6 +16,7 @@ const StyledAside = styled.aside`
 
 function Sidebar() {
   const { cabins } = useCabin();
+  const { settings } = useSettings();
 
   return (
     <StyledAside>
