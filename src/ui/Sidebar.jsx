@@ -3,6 +3,8 @@ import Logo from "./Logo";
 import MainNav from "./MainNav";
 import { useCabin } from "../features/cabins/useCabin";
 import { useSettings } from "../features/settings/useSettings";
+import { useBookings } from "../features/bookings/useBookings";
+import Uploader from "../data/Uploader";
 
 const StyledAside = styled.aside`
   background-color: var(--color-grey-0);
@@ -17,11 +19,13 @@ const StyledAside = styled.aside`
 function Sidebar() {
   const { cabins } = useCabin();
   const { settings } = useSettings();
+  const { bookings } = useBookings();
 
   return (
     <StyledAside>
       <Logo />
       <MainNav />
+      <Uploader />
     </StyledAside>
   );
 }
