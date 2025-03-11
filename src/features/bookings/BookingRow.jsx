@@ -15,10 +15,9 @@ import {
   HiTrash,
 } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
-import { deleteBooking } from "../../services/apiBookings";
-import { useDeleteCabin } from "../cabins/useDeleteCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -63,7 +62,7 @@ function BookingRow({
 }) {
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteBooking, isDeleting } = useDeleteCabin();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const statusToTagName = {
     unconfirmed: "blue",
