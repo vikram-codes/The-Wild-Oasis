@@ -15,6 +15,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Checkin from "./pages/Checkin";
 import ProtectedLayout from "./ui/ProtectedLayout";
+import { DarkModeProvider } from "./context/DarkModeContext"; // ✅ Import the provider
+import DarkModeToggle from "./ui/DarkModeToggle"; // ✅ Ensure it's used inside the provider
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,29 +31,36 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              <ProtectedLayout>
-                <AppLayout />
-              </ProtectedLayout>
-            }
-          >
-            <Route index element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="/cabins" element={<Cabins />} />
-            <Route path="/bookings" element={<Bookings />} />
-            <Route path="/bookings/:bookingId" element={<Booking />} />
-            <Route path="/checkin/:bookingId" element={<Checkin />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/users" element={<Users />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+
+      {/* ✅ Wrap everything inside DarkModeProvider */}
+      <DarkModeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                <ProtectedLayout>
+                  <AppLayout />
+                </ProtectedLayout>
+              }
+            >
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="/cabins" element={<Cabins />} />
+              <Route path="/bookings" element={<Bookings />} />
+              <Route path="/bookings/:bookingId" element={<Booking />} />
+              <Route path="/checkin/:bookingId" element={<Checkin />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/users" element={<Users />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+
+        {/* ✅ Dark Mode Toggle (Now correctly inside the provider) */}
+        <DarkModeToggle />
+      </DarkModeProvider>
 
       <Toaster
         position="top-center"
