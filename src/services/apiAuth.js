@@ -5,7 +5,7 @@ export async function signup({ fullName, email, password }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    option: {
+    options: {
       data: {
         fullName,
         avatar: "",
@@ -36,7 +36,6 @@ export async function getCurrentUser() {
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(error.message);
-
   return data?.user;
 }
 
