@@ -4,6 +4,8 @@ import { useRecentBookings } from "./useRecentBookings";
 import Spinner from "../../ui/Spinner";
 import Stats from "./Stats";
 import { useCabin } from "../cabins/useCabin";
+import SalesChart from "./SalesChart";
+import DurationChart from "./DurationChart";
 // import SalesChart from "./SalesChart";
 // import DurationChart from "./DurationChart";
 // import TodayActivity from "../check-in-out/TodayActivity";
@@ -30,9 +32,8 @@ function DashboardLayout() {
         numDays={numDays}
         cabinCount={cabins.length}
       />
-      {/* <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
-      <SalesChart bookings={bookings} numDays={numDays} /> */}
+      <SalesChart bookings={bookings} numDays={numDays} />
     </StyledDashboardLayout>
   );
 }
