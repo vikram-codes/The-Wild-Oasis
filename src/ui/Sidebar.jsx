@@ -4,7 +4,6 @@ import MainNav from "./MainNav";
 import { useCabin } from "../features/cabins/useCabin";
 import { useSettings } from "../features/settings/useSettings";
 import { useBookings } from "../features/bookings/useBookings";
-import Uploader from "../data/Uploader";
 
 const StyledAside = styled.aside`
   background-color: var(--color-grey-0);
@@ -25,7 +24,6 @@ function Sidebar() {
     <StyledAside>
       <Logo />
       <MainNav />
-      <Uploader />
     </StyledAside>
   );
 }
